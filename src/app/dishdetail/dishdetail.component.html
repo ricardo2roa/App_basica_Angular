@@ -1,0 +1,43 @@
+<div class="container"
+     fxLayout="row"
+     fxLayout.sm="column"
+     fxLayout.xs="column"
+     fxLayoutAlign.gt-md="center center"
+     fxLayoutGap="20px"
+     fxLayoutGap.xs="0"
+     *ngIf="selectedDish">
+
+    <div fxFlex="40">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h3>{{selectedDish.name | uppercase}}</h3>
+          </mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src={{selectedDish.image}} alt={{selectedDish.name}}/>
+        <mat-card-content>
+          <span>{{selectedDish.description}}</span>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div fxflex="40" *ngIf="selectedDish.comments" fxFlexAlign="start">
+        <h3 mat-line>Comments</h3>
+        <mat-list mat-line>
+          <mat-list-item *ngFor="let com of selectedDish.comments">
+            <p matLine>{{com.comment}}</p>
+            <p matLine>{{com.rating}} Stars</p>
+            <p matLine>-- {{com.author}} {{com.date | date:'MMMM d, y' }}</p>
+          </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div fxflex="40" *ngIf="!selectedDish.comments" fxFlexAlign="start">
+      <h3 mat-line>Comments</h3>
+      <p matLine>Don't have comments</p>
+    </div>
+</div>
