@@ -21,6 +21,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatOptionModule} from "@angular/material/core";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 //Servicios
 import {DishService} from "./services/dish.service";
 import {PromotionService} from "./services/promotion.service";
@@ -71,7 +72,8 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
     MatCheckboxModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatOptionModule
+    MatOptionModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     DishService,
