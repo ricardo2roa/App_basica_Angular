@@ -19,7 +19,7 @@ export class DishdetailComponent implements OnInit {
               private location:Location) {
     this.activateroute.params.subscribe(parameter =>{
       this.dishservice.getDish(parameter.id)
-        .then((dish)=> this.selectedDish = dish);
+        .subscribe((dish)=> this.selectedDish = dish);
       console.log(this.selectedDish)
     });
   }
