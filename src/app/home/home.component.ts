@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 //Clase para promociones y platos
 import {Dish} from "../shared/dish";
 import {Promotion} from "../shared/promotion";
@@ -7,6 +7,7 @@ import {DishService} from "../services/dish.service";
 import {PromotionService} from "../services/promotion.service";
 import {LeaderService} from "../services/leader.service";
 import {leader} from "../shared/leader";
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
   leader: leader;
   constructor(private dish_svc:DishService,
               private promotion_svc:PromotionService,
-              private leader_svc:LeaderService) { }
+              private leader_svc:LeaderService,
+              @Inject('BaseURL') public BaseURL:string ) { }
 
   ngOnInit(): void {
     this.dish_svc.getDishFeatured()

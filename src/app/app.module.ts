@@ -41,7 +41,9 @@ import { LoginComponent } from './login/login.component';
 //Routing
 import {AppRoutingModule} from "./app-routing/app-routing.module";
 
-
+//HTTP
+import {HttpClientModule} from "@angular/common/http";
+import {BaseURL} from './shared/baseUrl';
 
 @NgModule({
   declarations: [
@@ -75,12 +77,14 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
     MatSlideToggleModule,
     MatOptionModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule
   ],
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    {provide:'BaseURL', useValue: BaseURL}
   ],
   entryComponents:[
     LoginComponent
