@@ -22,6 +22,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatOptionModule} from "@angular/material/core";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSliderModule} from "@angular/material/slider";
 //Servicios
 import {DishService} from "./services/dish.service";
 import {PromotionService} from "./services/promotion.service";
@@ -73,7 +74,8 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
     MatSelectModule,
     MatSlideToggleModule,
     MatOptionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule
   ],
   providers: [
     DishService,
