@@ -40,6 +40,8 @@ export class DishdetailComponent implements OnInit {
   next: string;
   commentForm: FormGroup;
   comment:Comment;
+  errMess: string;
+  dishcopy:Dish;
 
   formErrors:formErros = {
     author:'',
@@ -78,7 +80,8 @@ export class DishdetailComponent implements OnInit {
     .subscribe(dishIds => this.dishIds = dishIds);
     //snapshot -> toma una captura del valor observable
     this.activateroute.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-    .subscribe(dish => {this.selectedDish = dish; this.setPrevNext(dish.id);});
+    .subscribe(dish => {this.selectedDish = dish; this.dishcopy = dish; this.setPrevNext(dish.id);},
+    errmess => this.errMess = <any>errmess);
   }
 
   createForm(){
@@ -129,7 +132,16 @@ export class DishdetailComponent implements OnInit {
     let datetoday = new Date();
     this.comment = this.commentForm.value;
     this.comment.date = datetoday.toISOString();
-    this.selectedDish.comments.push(this.comment);
+    this.dishcopy.comments.push(this.comment);
+    this.dishservice.putDish(this.dishcopy)
+    .subscribe(dish=>{
+      this.selectedDish = dish;
+      this.dishcopy = dish;
+    },errmess => {
+      this.selectedDish = null;
+      this.dishcopy = null;
+      this.errMess = <any>errmess;
+    });
     this.commentForm.reset({
       nameOfComment:'',
       rating: 0,

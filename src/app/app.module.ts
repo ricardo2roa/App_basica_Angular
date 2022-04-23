@@ -23,10 +23,12 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatOptionModule} from "@angular/material/core";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSliderModule} from "@angular/material/slider";
+
 //Servicios
 import {DishService} from "./services/dish.service";
 import {PromotionService} from "./services/promotion.service";
 import {LeaderService} from "./services/leader.service";
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 //Componentes del Proyecto
 import { MenuComponent } from './menu/menu.component'
@@ -44,6 +46,7 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
 //HTTP
 import {HttpClientModule} from "@angular/common/http";
 import {BaseURL} from './shared/baseUrl';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,8 @@ import {BaseURL} from './shared/baseUrl';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
@@ -84,6 +88,7 @@ import {BaseURL} from './shared/baseUrl';
     DishService,
     PromotionService,
     LeaderService,
+    ProcessHTTPMsgService,
     {provide:'BaseURL', useValue: BaseURL}
   ],
   entryComponents:[
