@@ -1,5 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { expand, flyInOut } from '../animations/app.animations';
+import { FeedbackService } from '../services/feedback.service';
 import {feedback, ContactType} from "../shared/feedback";
 
 interface formErros{
@@ -26,14 +28,23 @@ interface propertiesMessages{
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  host:{
+    '[@flyInOut]':'true',
+    'style':'display:block;'
+  },
+  animations:[
+    flyInOut(),
+    expand()
+  ]
 })
 export class ContactComponent implements OnInit {
 
   feedbackForm: FormGroup;
   feedback: feedback;
   contacttype:string[] = ContactType;
-
+  errMess:String;
+  hiddenForm: boolean = false;
   @ViewChild('fform') feedbackFormDirective:HTMLFormElement;
 
 
@@ -65,7 +76,7 @@ export class ContactComponent implements OnInit {
     }
   };
 
-  constructor(private fb:FormBuilder, private cd:ChangeDetectorRef) {
+  constructor(private fb:FormBuilder,private feedbackService:FeedbackService) {
     this.createForm();
   }
 
@@ -111,8 +122,14 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit(){
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    this.hiddenForm = true;
+
+    this.feedbackService.submitFeedback(this.feedbackForm.value)
+    .subscribe((feedback)=> {
+      this.feedback = feedback;
+    },
+    errmess => this.errMess = <any>errmess);
+
     this.feedbackForm.reset({
       firstname:'',
       lastname: '',
@@ -122,7 +139,12 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
+
     this.feedbackFormDirective.resetForm();
+
+    setTimeout(() => {
+      this.hiddenForm = false
+    }, 5000);
   }
 
 }

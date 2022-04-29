@@ -35,7 +35,7 @@
       </div>
     </div>
   </div>
-  <div fxflex fxFlexOffset="20px" class="form-size">
+  <div fxflex fxFlexOffset="20px" class="form-size" *ngIf="!hiddenForm" [@expand]>
     <h3>Send us your Feedback</h3>
     <p>{{feedbackForm.value|json}} {{feedbackForm.status}}</p>
     <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" #fform="ngForm">
@@ -98,5 +98,37 @@
                 class="background-primary text-floral-white"
         [disabled]="feedbackForm.invalid">Submit</button>
     </form>
+  </div>
+  <div fxflex class="form-size" *ngIf="hiddenForm">
+    <h3>Send us your Feedback</h3>
+    <div *ngIf="feedback" [@expand]>
+      <h3>Your Submission</h3>
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <b>First Name:</b>{{feedback.firstname}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <b>Last Name:</b>{{feedback.lastname}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <b>Tel. Number:</b>{{feedback.telnum}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <b>Email:</b>{{feedback.email}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <b>Contact You?:</b>{{feedback.agree}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <b>How?:</b>{{feedback.contacttype}}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <b>FeedBack:</b>{{feedback.message}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div [hidden]="feedback">
+      <mat-spinner></mat-spinner><h4>Submitting Form</h4>
+    </div>
   </div>
 </div>

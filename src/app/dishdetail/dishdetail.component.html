@@ -6,7 +6,7 @@
      fxLayoutGap="20px"
      fxLayoutGap.xs="0" *ngIf="selectedDish">
 
-    <div fxFlex="40" *ngIf="selectedDish">
+    <div fxFlex="40" *ngIf="selectedDish" [@visibility]="visibility" [@expand]>
       <mat-card>
         <mat-card-header>
           <mat-card-title>
@@ -33,7 +33,7 @@
     <div class="container"
      fxLayout="column"
      fxLayoutGap="20px">
-        <div fxflex="40" *ngIf="selectedDish.comments" fxFlexAlign="start">
+        <div fxflex="40" *ngIf="selectedDish" fxFlexAlign="start" [@visibility]="visibility" [@expand]>
           <h3 mat-line>Comments</h3>
           <mat-list mat-line>
             <mat-list-item *ngFor="let com of selectedDish.comments">
@@ -49,7 +49,7 @@
         <p matLine>Don't have comments</p>
       </div>
 
-      <div fxflex="40" fxFlexAlign="start" class="full-width">
+      <div fxflex="40" fxFlexAlign="start" class="full-width" *ngIf="selectedDish" [@visibility]="visibility" [@expand]>
         <mat-list mat-line *ngIf="!commentForm.invalid">
           <mat-list-item>
             <p matLine>{{commentForm.get('comment').value}}</p>
